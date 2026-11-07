@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Toy Shop Inventory System</title>
+    <title>Customer Login - Toy Shop Inventory System</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f6f9;
             margin: 0;
             padding: 0;
+            color: #333;
         }
         header {
             background-color: #2c3e50;
@@ -19,11 +20,26 @@
         .container {
             width: 85%;
             max-width: 450px;
-            margin: 50px auto;
+            margin: 45px auto;
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-top: 5px solid #2ecc71;
+        }
+        .portal-tag {
+            display: inline-block;
+            background-color: #e8f8f5;
+            color: #27ae60;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        h2 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
         }
         .form-group {
             margin-bottom: 15px;
@@ -44,7 +60,7 @@
             font-size: 15px;
         }
         .btn-submit {
-            background-color: #3498db;
+            background-color: #2ecc71;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -55,7 +71,7 @@
             font-weight: bold;
         }
         .btn-submit:hover {
-            background-color: #2980b9;
+            background-color: #27ae60;
         }
         .error-box {
             background-color: #f8d7da;
@@ -69,6 +85,7 @@
         .link-bar {
             text-align: center;
             margin-top: 15px;
+            font-size: 14px;
         }
         .link-bar a {
             color: #3498db;
@@ -76,6 +93,13 @@
         }
         .link-bar a:hover {
             text-decoration: underline;
+        }
+        .switch-portal {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 14px;
         }
         footer {
             margin-top: 60px;
@@ -94,7 +118,11 @@
     </header>
 
     <div class="container">
-        <h2>User Login</h2>
+        <span class="portal-tag">CUSTOMER PORTAL</span>
+        <h2>Customer Login</h2>
+        <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
+            Log in to your customer account to browse toys, manage your cart, and track orders.
+        </p>
 
         {% if error %}
             <div class="error-box">
@@ -115,14 +143,15 @@
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
 
-            <button type="submit" class="btn-submit">Login</button>
+            <button type="submit" class="btn-submit">Login as Customer</button>
         </form>
 
         <div class="link-bar">
-            Don't have an account? <a href="{% url 'signup' %}">Sign up as Customer</a>
+            Don't have an account? <a href="{% url 'signup' %}">Customer Sign Up</a>
         </div>
-        <div class="link-bar" style="margin-top: 8px;">
-            Administrator? <a href="{% url 'admin_signup' %}" style="color: #e74c3c; font-weight: bold;">Register as Admin</a>
+
+        <div class="switch-portal">
+            Are you an administrator? <a href="{% url 'admin_login' %}" style="color: #e74c3c; font-weight: bold; text-decoration: none;">Go to Admin Login &rarr;</a>
         </div>
     </div>
 

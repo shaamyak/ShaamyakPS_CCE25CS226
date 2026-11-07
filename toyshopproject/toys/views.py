@@ -17,6 +17,31 @@ def home(request):
     toys = Toy.objects.all()[:6]
     return render(request, 'home.html', {'toys': toys})
 
+def admin_login_view(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser or request.user.is_staff:
+            return redirect('admin_dashboard')
+        return redirect('user_dashboard')
+
+    error_message = None
+
+    if request.method == 'POST':
+        user_name = request.POST.get('username')
+        pass_word = request.POST.get('password')
+
+        user = authenticate(request, username=user_name, password=pass_word)
+
+        if user is not None:
+            if user.is_superuser or user.is_staff:
+                login(request, user)
+                return redirect('admin_dashboard')
+            else:
+                error_message = "Access denied: This account does not have administrator privileges."
+        else:
+            error_message = "Invalid admin username or password. Please try again."
+
+    return render(request, 'admin_login.html', {'error': error_message})
+
 def login_view(request):
     if request.user.is_authenticated:
         if request.user.is_superuser or request.user.is_staff:
