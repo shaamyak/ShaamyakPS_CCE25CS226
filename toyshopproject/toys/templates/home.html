@@ -163,7 +163,10 @@
 <body>
 
     <header>
-        <h1>Toy Shop Inventory System</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 960px; margin: 0 auto; padding: 0 15px;">
+            <h1 style="margin: 0; font-size: 24px;"><a href="{% url 'home' %}" style="color: white; text-decoration: none;">Toy Shop Inventory System</a></h1>
+            <a href="{% url 'home' %}" style="background: rgba(255,255,255,0.2); color: white; padding: 7px 15px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 14px; border: 1px solid rgba(255,255,255,0.35);">Home</a>
+        </div>
     </header>
 
     <div class="container">
@@ -201,7 +204,6 @@
         <p style="color: #7f8c8d; font-size: 14px; margin-top: 0; margin-bottom: 25px;">Choose whether you are logging in as a Customer or an Administrator</p>
 
         <div class="portal-grid">
-            <!-- Customer Portal Card -->
             <div class="portal-card user-card">
                 <div>
                     <span class="badge badge-user">Customer Portal</span>
@@ -218,7 +220,6 @@
                 </div>
             </div>
 
-            <!-- Administrator Portal Card -->
             <div class="portal-card admin-card">
                 <div>
                     <span class="badge badge-admin">Admin Portal</span>

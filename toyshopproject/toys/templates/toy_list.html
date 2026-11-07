@@ -116,7 +116,10 @@
 <body>
 
     <header>
-        <h1>Toy Shop Inventory System</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 15px;">
+            <h1 style="margin: 0; font-size: 22px;"><a href="{% url 'home' %}" style="color: white; text-decoration: none;">Toy Shop Inventory System</a></h1>
+            <a href="{% url 'home' %}" style="background: rgba(255,255,255,0.2); color: white; padding: 7px 15px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 14px; border: 1px solid rgba(255,255,255,0.35);">Home</a>
+        </div>
     </header>
 
     <div class="container">
@@ -126,6 +129,7 @@
                 <span style="font-size: 13px; color: #777;">Welcome, {{ user.username }} (Administrator)</span>
             </div>
             <div>
+                <a href="{% url 'home' %}" class="btn" style="background:#34495e; color:white;">Home</a>
                 <a href="{% url 'admin_dashboard' %}" class="btn btn-blue">&larr; Admin Dashboard</a>
                 <a href="{% url 'add_toy' %}" class="btn btn-add">+ Add Toy</a>
                 <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>

@@ -89,13 +89,19 @@
 <body>
 
     <header>
-        <h1>Toy Shop Inventory System</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 650px; margin: 0 auto; padding: 0 15px;">
+            <h1 style="margin: 0; font-size: 22px;"><a href="{% url 'home' %}" style="color: white; text-decoration: none;">Toy Shop Inventory System</a></h1>
+            <a href="{% url 'home' %}" style="background: rgba(255,255,255,0.2); color: white; padding: 7px 15px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 14px; border: 1px solid rgba(255,255,255,0.35);">Home</a>
+        </div>
     </header>
 
     <div class="container">
         <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
             <a href="{% url 'user_dashboard' %}" style="color: #3498db; text-decoration: none; font-weight: bold;">&larr; Back to Dashboard</a>
-            <a href="{% url 'user_orders' %}" style="color: #3498db; text-decoration: none; font-weight: bold;">My Orders &rarr;</a>
+            <div>
+                <a href="{% url 'home' %}" style="color: #34495e; text-decoration: none; font-weight: bold; margin-right: 15px;">Home</a>
+                <a href="{% url 'user_orders' %}" style="color: #3498db; text-decoration: none; font-weight: bold;">My Orders &rarr;</a>
+            </div>
         </div>
 
         <div class="profile-card">
