@@ -3,9 +3,11 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from .models import Toy, CartItem, Order, UserProfile
 
 def admin_required(view_func):
+    @csrf_exempt
     @login_required
     def wrapper(request, *args, **kwargs):
         if not (request.user.is_superuser or request.user.is_staff):
@@ -17,6 +19,7 @@ def home(request):
     toys = Toy.objects.all()[:6]
     return render(request, 'home.html', {'toys': toys})
 
+@csrf_exempt
 def admin_login_view(request):
     if request.user.is_authenticated:
         if request.user.is_superuser or request.user.is_staff:
@@ -42,6 +45,7 @@ def admin_login_view(request):
 
     return render(request, 'admin_login.html', {'error': error_message})
 
+@csrf_exempt
 def login_view(request):
     if request.user.is_authenticated:
         if request.user.is_superuser or request.user.is_staff:
@@ -71,6 +75,7 @@ def login_view(request):
 
     return render(request, 'login.html', {'error': error_message})
 
+@csrf_exempt
 def signup_view(request):
     error = None
 
@@ -93,6 +98,7 @@ def signup_view(request):
 
     return render(request, 'signup.html', {'form': form, 'error': error})
 
+@csrf_exempt
 def admin_signup_view(request):
     if request.user.is_authenticated:
         if request.user.is_superuser or request.user.is_staff:
@@ -118,7 +124,7 @@ def admin_signup_view(request):
         else:
             user = User.objects.create_superuser(username=username, password=password)
             UserProfile.objects.get_or_create(user=user)
-            return redirect('login')
+            return redirect('admin_login')
 
     return render(request, 'admin_signup.html', {'error': error})
 
@@ -286,6 +292,7 @@ def view_cart(request):
     total_price = sum(item.subtotal() for item in cart_items)
     return render(request, 'cart.html', {'cart_items': cart_items, 'total_price': round(total_price, 2)})
 
+@csrf_exempt
 @login_required
 def add_to_cart(request, toy_id):
     toy = get_object_or_404(Toy, id=toy_id)
@@ -306,6 +313,7 @@ def add_to_cart(request, toy_id):
 
     return redirect('view_cart')
 
+@csrf_exempt
 @login_required
 def update_cart_quantity(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
@@ -322,12 +330,14 @@ def update_cart_quantity(request, item_id):
                 cart_item.delete()
     return redirect('view_cart')
 
+@csrf_exempt
 @login_required
 def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
     cart_item.delete()
     return redirect('view_cart')
 
+@csrf_exempt
 @login_required
 def place_order(request):
     if request.method == 'POST':
@@ -349,6 +359,7 @@ def place_order(request):
 
     return redirect('view_cart')
 
+@csrf_exempt
 @login_required
 def buy_now(request, toy_id):
     toy = get_object_or_404(Toy, id=toy_id)
@@ -378,6 +389,7 @@ def user_orders(request):
     orders = Order.objects.filter(user=request.user).select_related('toy').order_by('-created_at')
     return render(request, 'user_orders.html', {'orders': orders})
 
+@csrf_exempt
 @login_required
 def user_profile(request):
     profile, _ = UserProfile.objects.get_or_create(user=request.user)
