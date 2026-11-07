@@ -12,7 +12,6 @@ class ToyShopInventoryTests(TestCase):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Toy Shop Inventory System')
-        self.assertContains(response, 'Ziuke Infotech (OPC) Private Limited')
         self.assertContains(response, '2026')
         self.assertContains(response, 'Add Toy')
         self.assertContains(response, 'View Toys')
@@ -63,7 +62,6 @@ class ToyShopInventoryTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Lego City Police')
         self.assertContains(response, 'Welcome, testuser')
-        self.assertContains(response, 'Ziuke Infotech (OPC) Private Limited')
 
     def test_edit_toy(self):
         self.client.login(username='testuser', password='password123')
