@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# SQLite database (optional, but keep it clean)
+*.sqlite3-journal
+
+# Environment / IDE
+.vscode/
+.idea/
+

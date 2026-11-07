@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toy Shop Inventory System - Home</title>
+    <!-- Simple CSS styling for clean, neat layout -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        /* Header styling */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        /* Main container */
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        /* Buttons styling */
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .btn-green {
+            background-color: #2ecc71;
+        }
+        .btn-green:hover {
+            background-color: #27ae60;
+        }
+        /* Top user status bar */
+        .user-bar {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        /* Footer styling */
+        footer {
+            margin-top: 50px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            color: #555;
+            text-align: center;
+            font-size: 14px;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Toy Shop Inventory System</h1>
+    </header>
+
+    <!-- Main Content Box -->
+    <div class="container">
+        <!-- Display login status -->
+        <div class="user-bar">
+            {% if user.is_authenticated %}
+                <span>Logged in as: <strong>{{ user.username }}</strong> | <a href="{% url 'logout' %}">Logout</a></span>
+            {% else %}
+                <span><a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a></span>
+            {% endif %}
+        </div>
+
+        <h2>Welcome to Toy Shop Inventory System</h2>
+        <!-- Short welcome paragraph -->
+        <p>
+            This application helps you easily manage your toy store inventory.
+            You can keep track of all toys, their recommended age group, category,
+            and prices. You can add new toys, update existing toy details, or delete
+            items when needed.
+        </p>
+
+        <!-- Two links styled as buttons -->
+        <div style="margin-top: 30px;">
+            <a href="{% url 'add_toy' %}" class="btn btn-green">Add Toy</a>
+            <a href="{% url 'toy_list' %}" class="btn">View Toys</a>
+        </div>
+    </div>
+
+    <!-- Footer Section with Company Name and Year -->
+    <footer>
+        <p>Ziuke Infotech (OPC) Private Limited &copy; 2026. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+
