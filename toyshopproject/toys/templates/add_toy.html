@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Toy - Toy Shop Inventory System</title>
-    <!-- Simple CSS styling -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,78 +76,61 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <h1>Toy Shop Inventory System</h1>
     </header>
 
-    <!-- Form Container -->
     <div class="container">
         <h2>Add New Toy</h2>
 
-        <!-- Form for adding a toy with JavaScript validation onsubmit -->
         <form id="toyForm" method="POST" action="{% url 'add_toy' %}" onsubmit="return validateForm()">
-            <!-- CSRF token for security -->
             {% csrf_token %}
 
-            <!-- Toy Name -->
             <div class="form-group">
                 <label for="toy_name">Toy Name:</label>
                 <input type="text" id="toy_name" name="toy_name" placeholder="Enter toy name">
             </div>
 
-            <!-- Age Group -->
             <div class="form-group">
                 <label for="age_group">Age Group:</label>
                 <input type="text" id="age_group" name="age_group" placeholder="e.g. 3-5 Years">
             </div>
 
-            <!-- Category -->
             <div class="form-group">
                 <label for="category">Category:</label>
                 <input type="text" id="category" name="category" placeholder="e.g. Board Games, Action Figures">
             </div>
 
-            <!-- Price -->
             <div class="form-group">
                 <label for="price">Price:</label>
                 <input type="text" id="price" name="price" placeholder="e.g. 499">
             </div>
 
-            <!-- Submit Button -->
             <button type="submit" class="btn-submit">Save Toy</button>
         </form>
 
         <a href="{% url 'toy_list' %}" class="nav-link">&larr; Back to Toy List</a>
     </div>
 
-    <!-- JavaScript Validation: Checks that no field is left empty -->
     <script>
         function validateForm() {
-            // Get values of all input fields
             var toyName = document.getElementById("toy_name").value.trim();
             var ageGroup = document.getElementById("age_group").value.trim();
             var category = document.getElementById("category").value.trim();
             var price = document.getElementById("price").value.trim();
 
-            // Check if any field is empty
             if (toyName === "" || ageGroup === "" || category === "" || price === "") {
-                // Show alert popup to the user
                 alert("Please fill in all fields before submitting!");
-                // Prevent form from being submitted
                 return false;
             }
 
-            // Allow form submission if all fields are filled
             return true;
         }
     </script>
 
-    <!-- Footer -->
     <footer>
         <p>Ziuke Infotech (OPC) Private Limited &copy; 2026. All rights reserved.</p>
     </footer>
 
 </body>
 </html>
-

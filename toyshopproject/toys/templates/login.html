@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Toy Shop Inventory System</title>
-    <!-- Simple CSS styling -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,7 +89,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <h1>Toy Shop Inventory System</h1>
     </header>
@@ -98,14 +96,12 @@
     <div class="container">
         <h2>User Login</h2>
 
-        <!-- Show error message if credentials are wrong -->
         {% if error %}
             <div class="error-box">
                 {{ error }}
             </div>
         {% endif %}
 
-        <!-- Login Form -->
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
 
@@ -127,11 +123,9 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>Ziuke Infotech (OPC) Private Limited &copy; 2026. All rights reserved.</p>
     </footer>
 
 </body>
 </html>
-

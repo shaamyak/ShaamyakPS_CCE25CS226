@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Toy - Toy Shop Inventory System</title>
-    <!-- Simple CSS styling -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,52 +76,42 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <h1>Toy Shop Inventory System</h1>
     </header>
 
-    <!-- Container -->
     <div class="container">
         <h2>Edit Toy Details</h2>
 
-        <!-- Edit Form pre-filled with current values -->
         <form id="editForm" method="POST" action="{% url 'edit_toy' toy.id %}" onsubmit="return validateEditForm()">
-            <!-- CSRF token for security -->
             {% csrf_token %}
 
-            <!-- Toy Name pre-filled -->
             <div class="form-group">
                 <label for="toy_name">Toy Name:</label>
                 <input type="text" id="toy_name" name="toy_name" value="{{ toy.toy_name }}">
             </div>
 
-            <!-- Age Group pre-filled -->
             <div class="form-group">
                 <label for="age_group">Age Group:</label>
                 <input type="text" id="age_group" name="age_group" value="{{ toy.age_group }}">
             </div>
 
-            <!-- Category pre-filled -->
             <div class="form-group">
                 <label for="category">Category:</label>
                 <input type="text" id="category" name="category" value="{{ toy.category }}">
             </div>
 
-            <!-- Price pre-filled -->
             <div class="form-group">
                 <label for="price">Price:</label>
                 <input type="text" id="price" name="price" value="{{ toy.price }}">
             </div>
 
-            <!-- Submit Button -->
             <button type="submit" class="btn-update">Update Toy</button>
         </form>
 
         <a href="{% url 'toy_list' %}" class="nav-link">&larr; Cancel and return to Toy List</a>
     </div>
 
-    <!-- JavaScript validation to prevent submitting empty fields -->
     <script>
         function validateEditForm() {
             var toyName = document.getElementById("toy_name").value.trim();
@@ -138,11 +127,9 @@
         }
     </script>
 
-    <!-- Footer -->
     <footer>
         <p>Ziuke Infotech (OPC) Private Limited &copy; 2026. All rights reserved.</p>
     </footer>
 
 </body>
 </html>
-

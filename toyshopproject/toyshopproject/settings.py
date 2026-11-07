@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Registering our toys app here
     'toys',
 ]
 
@@ -118,6 +117,5 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Redirect unauthorized users to the login page
 LOGIN_URL = 'login'
 
