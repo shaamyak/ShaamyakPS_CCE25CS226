@@ -51,15 +51,25 @@ def delete_toy(request, id):
     return redirect('toy_list')
 
 def signup_view(request):
+    error = None
+
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        data = request.POST.copy()
+        if not data.get('password2') and data.get('password1'):
+            data['password2'] = data['password1']
+
+        form = UserCreationForm(data)
         if form.is_valid():
             form.save()
             return redirect('login')
+        else:
+            for field, errors in form.errors.items():
+                error = errors[0]
+                break
     else:
         form = UserCreationForm()
 
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup.html', {'form': form, 'error': error})
 
 def login_view(request):
     error_message = None
