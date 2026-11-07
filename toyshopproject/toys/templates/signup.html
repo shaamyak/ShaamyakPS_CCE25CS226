@@ -115,15 +115,20 @@
 <body>
 
     <header>
-        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 15px;">
-            <h1 style="margin: 0; font-size: 22px;"><a href="{% url 'home' %}" style="color: white; text-decoration: none;">Toy Shop Inventory System</a></h1>
-            <a href="{% url 'home' %}" style="background: rgba(255,255,255,0.2); color: white; padding: 7px 15px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 14px; border: 1px solid rgba(255,255,255,0.35);">Home</a>
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 15px;">
+            <h1 style="margin: 0; font-size: 22px;"><a href="{% url 'home' %}"
+                    style="color: white; text-decoration: none;">Toy Shop Inventory System</a></h1>
+            <a href="{% url 'home' %}"
+                style="background: rgba(255,255,255,0.2); color: white; padding: 7px 15px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 14px; border: 1px solid rgba(255,255,255,0.35);">Home</a>
         </div>
     </header>
 
     <div class="container">
         <div style="margin-bottom: 15px;">
-            <a href="{% url 'home' %}" style="color: #3498db; text-decoration: none; font-size: 14px; font-weight: bold;">&larr; Back to Home</a>
+            <a href="{% url 'home' %}"
+                style="color: #3498db; text-decoration: none; font-size: 14px; font-weight: bold;">&larr; Back to
+                Home</a>
         </div>
         <h2>Create an Account</h2>
 
@@ -143,7 +148,8 @@
             Already have an account? <a href="{% url 'login' %}">Login here</a>
         </div>
         <div class="link-bar" style="margin-top: 8px;">
-            Want to create an Administrator account? <a href="{% url 'admin_signup' %}" style="color: #e74c3c; font-weight: bold;">Admin Sign Up here</a>
+            Want to create an Administrator account? <a href="{% url 'admin_signup' %}"
+                style="color: #e74c3c; font-weight: bold;">Admin Sign Up here</a>
         </div>
     </div>
 
