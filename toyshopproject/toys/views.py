@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -68,6 +68,35 @@ def signup_view(request):
 
     return render(request, 'signup.html', {'form': form, 'error': error})
 
+def admin_signup_view(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser or request.user.is_staff:
+            return redirect('admin_dashboard')
+        return redirect('user_dashboard')
+
+    error = None
+
+    if request.method == 'POST':
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '').strip()
+        confirm_password = request.POST.get('confirm_password', '').strip()
+
+        if not confirm_password:
+            confirm_password = password
+
+        if not username or not password:
+            error = "Please fill in all fields."
+        elif password != confirm_password:
+            error = "Passwords do not match."
+        elif User.objects.filter(username=username).exists():
+            error = "A user with that username already exists."
+        else:
+            user = User.objects.create_superuser(username=username, password=password)
+            UserProfile.objects.get_or_create(user=user)
+            return redirect('login')
+
+    return render(request, 'admin_signup.html', {'error': error})
+
 def logout_view(request):
     logout(request)
     return redirect('login')
@@ -90,6 +119,38 @@ def admin_dashboard(request):
         'recent_toys': recent_toys,
     }
     return render(request, 'admin_dashboard.html', context)
+
+@admin_required
+def admin_settings(request):
+    message = None
+    error = None
+
+    if request.method == 'POST':
+        new_username = request.POST.get('username', '').strip()
+        new_password = request.POST.get('password', '').strip()
+        confirm_password = request.POST.get('confirm_password', '').strip()
+
+        if not new_username:
+            error = "Username cannot be empty."
+        elif User.objects.filter(username=new_username).exclude(id=request.user.id).exists():
+            error = "Username is already taken by another user."
+        else:
+            request.user.username = new_username
+            if new_password:
+                if not confirm_password:
+                    confirm_password = new_password
+                if new_password != confirm_password:
+                    error = "Passwords do not match."
+                else:
+                    request.user.set_password(new_password)
+                    request.user.save()
+                    update_session_auth_hash(request, request.user)
+                    message = "Admin username and password updated successfully!"
+            else:
+                request.user.save()
+                message = "Admin username updated successfully!"
+
+    return render(request, 'admin_settings.html', {'message': message, 'error': error})
 
 @admin_required
 def admin_orders(request):

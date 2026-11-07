@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('admin-dashboard/settings/', views.admin_settings, name='admin_settings'),
     path('admin-dashboard/orders/', views.admin_orders, name='admin_orders'),
     path('admin-dashboard/orders/status/<int:order_id>/', views.admin_update_order_status, name='admin_update_order_status'),
     path('admin-dashboard/users/', views.admin_users, name='admin_users'),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('profile/', views.user_profile, name='user_profile'),
 
     path('signup/', views.signup_view, name='signup'),
+    path('admin-signup/', views.admin_signup_view, name='admin_signup'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
 ]
