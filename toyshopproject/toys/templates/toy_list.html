@@ -18,7 +18,7 @@
         }
         .container {
             width: 90%;
-            max-width: 900px;
+            max-width: 950px;
             margin: 30px auto;
             background-color: white;
             padding: 25px 30px;
@@ -32,6 +32,8 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .btn {
             display: inline-block;
@@ -47,6 +49,10 @@
         }
         .btn-add:hover {
             background-color: #27ae60;
+        }
+        .btn-blue {
+            background-color: #3498db;
+            color: white;
         }
         .btn-logout {
             background-color: #e74c3c;
@@ -115,8 +121,12 @@
 
     <div class="container">
         <div class="top-bar">
-            <h3>Welcome, {{ user.username }}</h3>
             <div>
+                <h3 style="margin: 0;">Manage Products</h3>
+                <span style="font-size: 13px; color: #777;">Welcome, {{ user.username }} (Administrator)</span>
+            </div>
+            <div>
+                <a href="{% url 'admin_dashboard' %}" class="btn btn-blue">&larr; Admin Dashboard</a>
                 <a href="{% url 'add_toy' %}" class="btn btn-add">+ Add Toy</a>
                 <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
             </div>

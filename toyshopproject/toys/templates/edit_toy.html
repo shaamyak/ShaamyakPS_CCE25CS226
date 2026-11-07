@@ -109,7 +109,10 @@
             <button type="submit" class="btn-update">Update Toy</button>
         </form>
 
-        <a href="{% url 'toy_list' %}" class="nav-link">&larr; Cancel and return to Toy List</a>
+        <div style="margin-top: 15px; display: flex; justify-content: space-between;">
+            <a href="{% url 'toy_list' %}" class="nav-link">&larr; Cancel and return to Toy List</a>
+            <a href="{% url 'admin_dashboard' %}" class="nav-link">Admin Dashboard &rarr;</a>
+        </div>
     </div>
 
     <script>

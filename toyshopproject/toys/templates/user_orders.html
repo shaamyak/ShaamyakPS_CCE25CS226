@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Order History - Toy Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 950px;
+            margin: 30px auto;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn-blue { background-color: #3498db; color: white; }
+        .btn-green { background-color: #2ecc71; color: white; }
+
+        .section-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #eee;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #fafbfc;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-Placed, .status-Pending { background: #fff3cd; color: #856404; }
+        .status-Shipped, .status-Processing { background: #cce5ff; color: #004085; }
+        .status-Delivered { background: #d4edda; color: #155724; }
+        .status-Cancelled { background: #f8d7da; color: #721c24; }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            color: #555;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Toy Shop Inventory System</h1>
+    </header>
+
+    <div class="container">
+        <div class="top-bar">
+            <div>
+                <h2 style="margin: 0;">My Order History</h2>
+                <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 14px;">Total Orders: {{ orders|length }}</p>
+            </div>
+            <div>
+                <a href="{% url 'user_dashboard' %}" class="btn btn-blue">&larr; Back to Products</a>
+                <a href="{% url 'view_cart' %}" class="btn btn-green">View Cart</a>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Total Paid</th>
+                        <th>Status</th>
+                        <th>Order Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td><strong>#{{ order.id }}</strong></td>
+                        <td>{{ order.toy.toy_name }}</td>
+                        <td>{{ order.toy.category }}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td><strong>₹ {{ order.total_price }}</strong></td>
+                        <td><span class="status-badge status-{{ order.status }}">{{ order.status }}</span></td>
+                        <td>{{ order.created_at|date:"d M Y, H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 30px; color: #888;">
+                            You haven't placed any orders yet. <br><br>
+                            <a href="{% url 'user_dashboard' %}" class="btn btn-green">Shop Toys Now</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>Toy Shop Inventory System &copy; 2026. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

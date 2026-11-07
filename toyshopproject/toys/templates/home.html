@@ -73,7 +73,9 @@
     <div class="container">
         <div class="user-bar">
             {% if user.is_authenticated %}
-                <span>Logged in as: <strong>{{ user.username }}</strong> | <a href="{% url 'logout' %}">Logout</a></span>
+                <span>Logged in as: <strong>{{ user.username }}</strong>
+                {% if user.is_superuser or user.is_staff %}(Admin){% else %}(Customer){% endif %}
+                | <a href="{% url 'logout' %}">Logout</a></span>
             {% else %}
                 <span><a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Sign Up</a></span>
             {% endif %}
@@ -88,8 +90,18 @@
         </p>
 
         <div style="margin-top: 30px;">
-            <a href="{% url 'add_toy' %}" class="btn btn-green">Add Toy</a>
-            <a href="{% url 'toy_list' %}" class="btn">View Toys</a>
+            {% if user.is_authenticated %}
+                {% if user.is_superuser or user.is_staff %}
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-green">Admin Dashboard</a>
+                    <a href="{% url 'toy_list' %}" class="btn">Manage Toys</a>
+                {% else %}
+                    <a href="{% url 'user_dashboard' %}" class="btn btn-green">Customer Dashboard</a>
+                    <a href="{% url 'view_cart' %}" class="btn">View Cart</a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-green">Login to Dashboard</a>
+                <a href="{% url 'signup' %}" class="btn">Register Account</a>
+            {% endif %}
         </div>
     </div>
 
